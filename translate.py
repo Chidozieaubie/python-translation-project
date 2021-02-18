@@ -111,7 +111,7 @@ def reverse_and_complement(sequence):
     >>> reverse_and_complement('AUGC')
     'GCAU'
     """
-    #return str(sequence[::-1].upper())
+    
     complement = {'A': 'U', 'C': 'G', 'G': 'C', 'U': 'A'}
     return ''.join([complement[base] for base in sequence[::-1].upper()])
     if sequence is None:
