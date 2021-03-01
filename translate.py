@@ -28,22 +28,25 @@ def translate_sequence(rna_sequence, genetic_code):
     str
         A string of the translated amino acids.
     """
-    protein_seq = ""
+    protein_seq = []
+    rna_sequence = rna_sequence.upper()
+    start_codon = rna_sequence[0:3]
     for i in range(0, len(rna_sequence), 3):
-        codon = rna_sequence[i:i + 3]
-        protein_seq += genetic_code[codon]
-        return protein_seq
+        codon = rna_sequence[i:i+3]
+        if genetic_code[start_codon] == "*":
+            break
         if genetic_code[codon] == "*":
-            return ""
+           break
         if len(rna_sequence) < 3:
-    	    return ""
+    	    break
+        protein_seq += genetic_code[codon]  
+    return "". join(protein_seq) 
 
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
 
     All three reading frames of `rna_sequence` are scanned from 'left' to
     'right', and the generation of a sequence of amino acids is started
-    whenever the start codon 'AUG' is found. The `rna_sequence` is assumed to
     be in the correct orientation (i.e., no reverse and/or complement of the
     sequence is explored).
 
