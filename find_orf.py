@@ -119,10 +119,10 @@ def vet_codon(codon):
     # Change `codon_pattern_str` so that it will match any valid codons, and
     # only valid codons.
     # Read the docstring above for additional clues.
-    codon_pattern_str = r'AUG'
+    codon_pattern_str = r'^([A|U|C|G]){3,3}$'
     ##########################################################################
 
-    codon_pattern = re.compile(codon_pattern_str)
+    codon_pattern = re.compile(codon_pattern_str, re.IGNORECASE)
 
     if codon_pattern.match(codon):
         return
@@ -139,8 +139,7 @@ def find_first_orf(sequence,
     An open-reading frame (ORF) is the part of an RNA sequence that is
     translated into a peptide. It must begin with a start codon, followed by
     zero or more codons (triplets of nucleotides), and end with a stop codon.
-    If there are no ORFs in the sequence, an empty string is returned.
-
+    If there are no ORFs in the sequence, an empty string is returned
     Parameters
     ----------
     sequence : str
